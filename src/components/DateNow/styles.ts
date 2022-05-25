@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { AppColors } from '../../styled';
 
 export const DateNowContainerBgColor = styled.div`
-	background-color: ${AppColors.colors.lightskyblue};
+	background-color: ${AppColors.colors.grayFour};
 `;
 
 export const DateNowContainer = styled.div`

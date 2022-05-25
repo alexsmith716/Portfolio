@@ -8,11 +8,7 @@ import Loading from '../components/Loading/Loading';
 import { AboutCSVBPostType } from '../types';
 import { wrapper, AppState } from '../redux/store';
 
-export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async ({req, res}): Promise<any> => {
-	res.setHeader(
-		'Cache-Control',
-		'public, s-maxage=10, stale-while-revalidate=59'
-	)
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async (): Promise<any> => {
 	await store.dispatch(loadAboutCSVB())
 		.catch((error: Error) => {
 			console.error(error);

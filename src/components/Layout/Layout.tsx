@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 import NavBar from '../NavBar/NavBar';
 import DateNow from '../DateNow/DateNow';
-import MetaWeather from '../MetaWeather/MetaWeather';
+import OpenWeathermap from '../OpenWeathermap/OpenWeathermap';
 import UserAgent from '../UserAgent/UserAgent';
 import Footer from '../Footer/Footer';
 import Head from 'next/head';
@@ -44,7 +44,7 @@ export const Layout = ({ children, title = 'Alex Smith\'s App' }: Props) => {
 
 			<DateNow />
 
-			<MetaWeather />
+			<OpenWeathermap />
 
 			<UserAgent />
 

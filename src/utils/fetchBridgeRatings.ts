@@ -10,13 +10,13 @@ const s3Client = new S3Client({
 	region,
 	credentials: fromCognitoIdentityPool({
 		client: new CognitoIdentityClient({ region }),
-		identityPoolId: process.env.fetchBridgeRatings_identityPoolId!,
+		identityPoolId: process.env.NEXT_PUBLIC_S3_BUCKET_IP_ID!,
 	}),
 });
 
 const getBridgeRatings = new GetObjectCommand({
-	Bucket: 'bucket-csv-6-29-21',
-	Key: 'Bridge_Ratings.csv',
+	Bucket: process.env.NEXT_PUBLIC_S3_BUCKET,
+	Key: process.env.NEXT_PUBLIC_S3_BUCKET_KEY,
 });
 
 function streamToString(stream: ReadableStream): Promise<string> {

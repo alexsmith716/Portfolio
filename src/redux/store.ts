@@ -8,8 +8,8 @@ import clientMiddleware from './clientMiddleware';
 import userAgentReducer from './reducers/userAgentSlice';
 import dateNowReducer from './reducers/dateNowSlice';
 import nycBridgeRatingsReducer from './reducers/nycBridgeRatingsSlice';
-import metaWeatherReducer from './reducers/metaWeatherSlice';
 import aboutCSVBReducer from './reducers/aboutCSVBSlice';
+import openWeathermapReducer from './reducers/openWeathermapSlice';
 import apiClient from '../utils/apiClient';
 //import storage from './create_sync_storage';
 
@@ -21,8 +21,8 @@ const rootReducer = combineReducers({
 	userAgentReducer,
 	dateNowReducer,
 	nycBridgeRatingsReducer,
-	metaWeatherReducer,
 	aboutCSVBReducer,
+	openWeathermapReducer,
 });
 
 const logger: Middleware = store => next => action => {
@@ -61,8 +61,8 @@ const makeStore = () => {
 				'userAgentReducer',
 				'dateNowReducer',
 				'nycBridgeRatingsReducer',
-				'metaWeatherReducer',
 				'aboutCSVBReducer',
+				'openWeathermapReducer',
 			],
 			storage,
 		};
