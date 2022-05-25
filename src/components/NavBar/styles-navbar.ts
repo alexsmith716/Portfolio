@@ -31,10 +31,10 @@ export const Expand = styled.div`
 `;
 
 export const NavBarBrandLink = styled.a`
-  color: #fff;
-  font-size: 1.25rem;
-  text-decoration: none;
-  cursor: pointer;
+	color: #fff;
+	font-size: 1.25rem;
+	text-decoration: none;
+	cursor: pointer;
 `;
 
 export const Toggler = styled.div`
@@ -94,23 +94,23 @@ export const NavBarNavA = styled.a`
 `;
 
 export const NavBarNavLink = styled.a<Props>`
-  color: ${(props): string => (props.activelink === 'true' ? colors.ivory : colors.grayFive)};
-  text-decoration: none;
+	color: ${(props): string => (props.activelink === 'true' ? colors.ivory : colors.grayFive)};
+	text-decoration: none;
 
-  &:hover {
-    color: ${colors.grayTwo};
-  }
+	&:hover {
+		color: ${colors.grayTwo};
+	}
 
-  @media screen and (max-width: 992px) {
-    text-align: center;
-    padding: 0.5rem;
-    width: 100%;
-    display: table;
+	@media screen and (max-width: 992px) {
+		text-align: center;
+		padding: 0.5rem;
+		width: 100%;
+		display: table;
 
-    &:hover {
-      background-color: ${colors.grayTwentyfour};
-    }
-  }
+		&:hover {
+			background-color: ${colors.grayTwentyfour};
+		}
+	}
 `;
 
 export const StyledSvgBars = styled(SvgBars)`

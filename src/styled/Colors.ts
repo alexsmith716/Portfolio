@@ -11,7 +11,6 @@ export const colors = {
 	grayNine: '#212529',
 	grayTwentyfour: '#3D3D3D',
 	black: '#000000',
-	lightskyblue: '#b0e2ff',
 	lavender: '#e6e6fa',
 	ivory: '#fffff0',
 	yellow: '#ff0',
@@ -43,4 +42,8 @@ export const colors = {
 	carrot: '#ed9121',
 	khaki: '#eee685',
 	lightsteelblue: '#cae1ff',
+	orange3: '#CD8500',
+	lightskyblue: '#b0e2ff',
+	lightskyblue1: '#BFEFFF',
+	blue: '#0000FF',
 };

@@ -3,8 +3,9 @@ import { wrapper } from '../redux/store';
 import { ThemeContext } from '../styled/ThemeContext';
 import { Layout } from '../components/Layout';
 import { actionSetUserAgent } from '../redux/reducers/userAgentSlice';
-import { loadMetaWeather } from '../redux/reducers/metaWeatherSlice';
+import { getAddress, loadOpenWeathermap } from '../redux/reducers/openWeathermapSlice';
 import { getUserAgent, isBot } from '../utils/userAgent';
+import { LatLonType } from '../types';
 import '../styled/fonts.css';
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -27,7 +28,14 @@ App.getInitialProps = wrapper.getInitialAppProps((store) => async ({ Component, 
 	}
 
 	if (isServer) {
-		await store.dispatch(loadMetaWeather())
+		const latLon = await getAddress()
+			.then((response) => {
+				return response;
+			})
+			.catch(() => {
+				store.dispatch( {type: 'OPENWEATHERMAP_FAIL', error: 'Error when attempting to fetch resource.' });
+			});
+		await store.dispatch(loadOpenWeathermap((latLon as unknown) as LatLonType))
 			.catch((error: Error) => {
 				console.error(error);
 			})

@@ -46,3 +46,8 @@ export type User = {
 	id: number;
 	name: string;
 };
+
+export type LatLonType = {
+	lat: number | undefined;
+	lon: number | undefined;
+};
