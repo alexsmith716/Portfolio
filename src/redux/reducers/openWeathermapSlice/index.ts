@@ -44,7 +44,7 @@ export default reducer;
 
 export async function getAddress() {
 	try {
-		const response =  await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=new+york,ny,us&limit=1&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`);
+		const response =  await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=new+york,ny,us&limit=1&appid=${process.env.NEXT_PUBLIC_APP_ID}`);
 		const ll = {
 			lat: response.data[0].lat,
 			lon: response.data[0].lon,
@@ -59,7 +59,7 @@ export function loadOpenWeathermap(latLon: LatLonType): AnyAction {
 	const isServer = typeof window === 'undefined';
 	let req: string;
 
-	isServer ? req = `https://api.openweathermap.org/data/2.5/weather?lat=${latLon.lat}&lon=${latLon.lon}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&units=imperial` : req = `/api/openweathermap?lat=${latLon.lat}&lon=${latLon.lon}`;
+	isServer ? req = `https://api.openweathermap.org/data/2.5/weather?lat=${latLon.lat}&lon=${latLon.lon}&appid=${process.env.NEXT_PUBLIC_APP_ID}&units=imperial` : req = `/api/openweathermap?lat=${latLon.lat}&lon=${latLon.lon}`;
 	return {
 		type: [OPENWEATHERMAP_LOAD, OPENWEATHERMAP_SUCCESS, OPENWEATHERMAP_FAIL],
 		httpClientPromise: ({httpClient}: {httpClient: AxiosInstance}) => httpClient.get(req)

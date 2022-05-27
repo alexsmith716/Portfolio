@@ -4,7 +4,7 @@ import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity';
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-provider-cognito-identity';
 import { BridgeRatingType } from '../types';
 
-const region = 'us-east-1';
+const region = process.env.NEXT_PUBLIC_S3_REGION;
 
 const s3Client = new S3Client({
 	region,
