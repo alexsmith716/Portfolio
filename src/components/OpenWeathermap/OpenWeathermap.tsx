@@ -38,6 +38,7 @@ const OpenWeathermap = () => {
 				<Styles.OpenWeathermapContainer className="flex-column align-items-center">
 					{/* (>>>>>>>>>>>>>>>>>>>>>> LOADING >>>>>>>>>>>>>>>>>>>>>>>>) */}
 					{loading && <Loading text="Loading" />}
+
 					{/* (>>>>>>>>>>>>>>>>>>>>>> LOADED >>>>>>>>>>>>>>>>>>>>>>>>) */}
 					{!loading && (
 						<Styles.OpenWeathermapContainerStyled className="flex-column-center">
@@ -48,7 +49,7 @@ const OpenWeathermap = () => {
 							{!loaded && openWeathermapData && openWeathermapData.error && <Styles.DataMessageError>{openWeathermapData.error}</Styles.DataMessageError>}
 
 							{loaded && openWeathermapData && !openWeathermapData.error && (
-								<div><Styles.DataMessageName>{openWeathermapData.name}</Styles.DataMessageName></div>
+								<div><Styles.DataMessageName data-testid="open-weather">{openWeathermapData.name}</Styles.DataMessageName></div>
 								)}
 
 							{loaded && openWeathermapData && !openWeathermapData.error && (

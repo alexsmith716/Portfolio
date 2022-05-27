@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		let lon: string | string[];
 
 		if (req.query.lat === 'undefined') {
-			const response =  await axios(`https://api.openweathermap.org/geo/1.0/direct?q=new+york,ny,us&limit=1&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`);
+			const response =  await axios(`https://api.openweathermap.org/geo/1.0/direct?q=new+york,ny,us&limit=1&appid=${process.env.NEXT_PUBLIC_APP_ID}`);
 			lat = response.data[0].lat.toString();
 			lon = response.data[0].lon.toString();
 		} else {
@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			lon = req.query.lon;
 		}
 
-		const returned = await axios(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&units=imperial`);
+		const returned = await axios(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.NEXT_PUBLIC_APP_ID}&units=imperial`);
 		res.status(returned.status).json(returned.data);
 	} catch (error) {
 		res.status(400).json({error: 'error'});

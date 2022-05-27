@@ -73,7 +73,7 @@ const AboutCSVB: NextPage<AboutCSVBPageProps> = ({documentTitle}) => {
 						)}
 						{loaded && aboutCSVBData && !aboutCSVBData.error && (
 							<>{postsData.map((post: AboutCSVBPostType, key: number) => (
-								<p data-cy="posts" key={key}>
+								<p data-testid="posts" key={key}>
 									{post.body}
 								</p>
 							))}</>
