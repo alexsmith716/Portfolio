@@ -2,7 +2,7 @@
 
 ## My Portfolio
 
-This is my Portfolio project. The goal of this repo is to become familiar working with Next.js. I want to use Next.js as a platform to build out TypeScript, UI, API, AWS, CI/CD, Testing and basically all other Server/Client skills & technologies. Main focus right now is to get a stable project that I can improve my Testing, TS and React knowledge.
+This is my current Portfolio project. The goal of this repo is to become familiar working with Next.js. I want to use Next.js as a platform to build out TypeScript, UI, API, AWS, CI/CD, Testing and basically all other Server/Client skills & technologies. Main focus right now is to get a stable project that I can improve my Testing, TS and React knowledge.
 
 [The app is deployed here.](https://portfolio-alexsmith716.vercel.app)
 
