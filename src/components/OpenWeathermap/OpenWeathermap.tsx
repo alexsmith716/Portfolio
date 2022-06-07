@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../redux/store';
-import { loadOpenWeathermap } from '../../redux/reducers/openWeathermapSlice';
+import { getAddress, loadOpenWeathermap } from '../../redux/reducers/openWeathermapSlice';
 import Loading from '../Loading/Loading';
 import Button from '../Button';
 import * as Styles from './styles';
@@ -10,10 +10,6 @@ const OpenWeathermap = () => {
 	const dispatch = useDispatch();
 
 	let openWeathermapDataTemp;
-	let latLon = {
-		lat: undefined,
-		lon: undefined,
-	};
 
 	const formatter = new Intl.NumberFormat('en-US', {
 		minimumFractionDigits: 1,
@@ -23,14 +19,25 @@ const OpenWeathermap = () => {
 	const loading = useSelector((state: AppState) => state.openWeathermapReducer.loading);
 	const loaded = useSelector((state: AppState) => state.openWeathermapReducer.loaded);
 	const openWeathermapData = useSelector((state: AppState) => state.openWeathermapReducer.openWeathermapData);
+	const coords = useSelector((state: AppState) => state.openWeathermapReducer.openWeathermapData.coord);
 
 	if(openWeathermapData && !openWeathermapData.error) {
 		openWeathermapDataTemp = formatter.format(openWeathermapData.main.temp);
-		latLon = {
-			lat: openWeathermapData.coord.lat,
-			lon: openWeathermapData.coord.lon,
-		};
 	}
+
+	const reloadOpenWeather = async () => {
+		if (coords) {
+			dispatch(loadOpenWeathermap({ lat:coords.lat, lon:coords.lon }));
+		} else {
+			await getAddress()
+				.then((response) => {
+					dispatch(loadOpenWeathermap({ lat:response.lat, lon:response.lon }));
+				})
+				.catch(() => {
+					dispatch({type: 'OPENWEATHERMAP_FAIL', error: { error: 'Error when attempting to fetch resource.' }});
+				});
+		}
+	};
 
 	return (
 		<div className="container">
@@ -63,7 +70,7 @@ const OpenWeathermap = () => {
 							<div className="mt-2">
 								<Button
 									className="btn-primary btn-md"
-									onClick={() => dispatch(loadOpenWeathermap(latLon))}
+									onClick={() => reloadOpenWeather()}
 									buttonText="Reload"
 								/>
 							</div>

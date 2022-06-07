@@ -54,7 +54,7 @@ const makeStore = () => {
 	} else {
 		const { persistStore, persistReducer } = require('redux-persist');
 		const storage = require('redux-persist/lib/storage').default;
-	
+
 		const persistConfig = {
 			key: 'root',
 			whitelist: [
@@ -66,9 +66,9 @@ const makeStore = () => {
 			],
 			storage,
 		};
-	
+
 		const persistedReducer = persistReducer(persistConfig, rootReducer);
-	
+
 		const store = configureStore({
 			reducer: persistedReducer,
 			middleware: bindMiddleware([clientMiddleware(providers)]),

@@ -33,12 +33,14 @@ App.getInitialProps = wrapper.getInitialAppProps((store) => async ({ Component, 
 				return response;
 			})
 			.catch(() => {
-				store.dispatch( {type: 'OPENWEATHERMAP_FAIL', error: 'Error when attempting to fetch resource.' });
+				store.dispatch({type: 'OPENWEATHERMAP_FAIL', error: { error: 'Error when attempting to fetch resource.' }});
 			});
-		await store.dispatch(loadOpenWeathermap((latLon as unknown) as LatLonType))
-			.catch((error: Error) => {
-				console.error(error);
-			})
+		if(latLon) {
+			await store.dispatch(loadOpenWeathermap((latLon as unknown) as LatLonType))
+				.catch((error: Error) => {
+					console.error(error);
+				})
+		}
 	}
 
 	const pageProps = {
