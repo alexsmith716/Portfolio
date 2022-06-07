@@ -8,7 +8,7 @@ describe('Mock App.getInitialProps Network Calls', () => {
 		
 		it('cy.get() - assert OpenWeathermap component has successful data', () => {
 			cy.visit('http://localhost:3000/');
-			cy.get('[data-testid=open-weather]').children().should('not.be.empty');
+			cy.get('[data-testid="open-weather-data"]').eq(0).children().should('not.be.empty');
 		});
 		
 		it('cy.task() - get OpenWeather latLon geocoding values and verify dispatch success of loadOpenWeathermap()', () => {
@@ -60,7 +60,7 @@ describe('Mock App.getInitialProps Network Calls', () => {
 				}
 			};
 
-			cy.task('nockGetOpenWeatherMap', {
+			cy.task('nockGetOpenWeatherMapSuccess', {
 				hostname: 'https://api.openweathermap.org',
 				method: 'get',
 				geocodePath: `/geo/1.0/direct?q=new+york,ny,us&limit=1&appid=${Cypress.env('APP_ID')}`,
@@ -75,7 +75,12 @@ describe('Mock App.getInitialProps Network Calls', () => {
 			// nock.scope:api.openweathermap.org query matching succeeded +1ms
 			// nock.scope:api.openweathermap.org matching https://api.openweathermap.org:443/data/2.5/weather to GET https://api.openweathermap.org:443/data/2.5/weather: true +0ms
 			cy.visit('http://localhost:3000/');
-			cy.contains('[data-testid=open-weather]', matchingBody.weatherData.name);
+			cy.get('[data-testid="open-weather-data"] > span').eq(0)
+				.should(($span) => {
+					const className = $span[0].className;
+					expect(className).to.match(/styles__DataMessageName/);
+				})
+				.and('contain', matchingBody.weatherData.name)
 		});
 	});
 });

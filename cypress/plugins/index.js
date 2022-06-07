@@ -33,14 +33,21 @@ module.exports = async (on, config) => {
 			return null;
 		},
 
-		// i knew there was a solution -chaining!
-		async nockGetOpenWeatherMap({ hostname, method, geocodePath, weatherDataPath, statusCode, body }) {
+		async nockGetOpenWeatherMapSuccess({ hostname, method, geocodePath, weatherDataPath, statusCode, body }) {
 			nock.activate();
 			nock(hostname)
 				.get(geocodePath)
 				.reply(statusCode, body.geocoding)
 				.get(weatherDataPath)
 				.reply(statusCode, body.weatherData)
+			return null;
+		},
+
+		async nockGetOpenWeatherMapFail({ hostname, method, geocodePath, statusCode, body }) {
+			nock.activate();
+			nock(hostname)
+				.get(geocodePath)
+				.reply(statusCode, body)
 			return null;
 		},
 

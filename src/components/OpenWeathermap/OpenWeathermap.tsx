@@ -53,11 +53,15 @@ const OpenWeathermap = () => {
 								The Exclusive <i>OpenWeather.com</i>&nbsp;forecast{loaded && openWeathermapData && <>&nbsp;for:</>}
 							</div>
 
-							{!loaded && openWeathermapData && openWeathermapData.error && <Styles.DataMessageError>{openWeathermapData.error}</Styles.DataMessageError>}
+							<div data-testid="open-weather-data">
+								{!loaded && openWeathermapData && openWeathermapData.error && (
+									<Styles.DataMessageError>{openWeathermapData.error}</Styles.DataMessageError>
+									)}
 
-							{loaded && openWeathermapData && !openWeathermapData.error && (
-								<div><Styles.DataMessageName data-testid="open-weather">{openWeathermapData.name}</Styles.DataMessageName></div>
-								)}
+								{loaded && openWeathermapData && !openWeathermapData.error && (
+									<Styles.DataMessageName>{openWeathermapData.name}</Styles.DataMessageName>
+									)}
+							</div>
 
 							{loaded && openWeathermapData && !openWeathermapData.error && (
 								<div><Styles.DataMessage>{openWeathermapData.weather[0].main}</Styles.DataMessage>&nbsp;-&nbsp;<Styles.DataMessage>{openWeathermapData.weather[0].description}</Styles.DataMessage></div>
