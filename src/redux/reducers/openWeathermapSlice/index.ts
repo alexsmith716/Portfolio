@@ -44,14 +44,14 @@ export default reducer;
 
 export async function getAddress() {
 	try {
-		const response =  await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=new+york,ny,us&limit=1&appid=${process.env.NEXT_PUBLIC_APP_ID}`);
+		const response = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=new+york,ny,us&limit=1&appid=${process.env.NEXT_PUBLIC_APP_ID}`);
 		const ll = {
 			lat: response.data[0].lat,
 			lon: response.data[0].lon,
 		};
 		return ll;
 	} catch (error) {
-		return error;
+		return Promise.reject();
 	}
 }
 
