@@ -48,6 +48,6 @@ export type User = {
 };
 
 export type LatLonType = {
-	lat: number | undefined;
-	lon: number | undefined;
+	lat: number;
+	lon: number;
 };
