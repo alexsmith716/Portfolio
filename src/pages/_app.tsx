@@ -34,6 +34,7 @@ App.getInitialProps = wrapper.getInitialAppProps((store) => async ({ Component, 
 			})
 			.catch(() => {
 				store.dispatch({type: 'OPENWEATHERMAP_FAIL', error: { error: 'Error when attempting to fetch resource.' }});
+				return null;
 			});
 		if(latLon) {
 			await store.dispatch(loadOpenWeathermap((latLon as unknown) as LatLonType))
