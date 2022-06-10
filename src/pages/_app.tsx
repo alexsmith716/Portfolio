@@ -28,7 +28,8 @@ App.getInitialProps = wrapper.getInitialAppProps((store) => async ({ Component, 
 	}
 
 	if (isServer) {
-		const latLon = await getAddress()
+		const startingGeo:string = 'new york, ny, us';
+		const latLon = await getAddress(startingGeo)
 			.then((response) => {
 				return response;
 			})
