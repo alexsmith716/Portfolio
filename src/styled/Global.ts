@@ -459,6 +459,10 @@ export const GlobalStyle = createGlobalStyle`
 		margin-top: 3rem;
 	}
 
+	.mb-2 {
+		margin-bottom: .5rem;
+	}
+
 	.mb-3 {
 		margin-bottom: 1rem;
 	}

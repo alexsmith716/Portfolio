@@ -33,3 +33,9 @@ export const DataMessageTemp = styled.span`
 	color: ${AppColors.colors.rutgersScarlet};
 	font-family: 'OpenSansBold', sans-serif;
 `;
+
+export const InputFormat = styled.span`
+	font-family: sans-serif;
+	font-size: 14px;
+	color: #666666;
+`;

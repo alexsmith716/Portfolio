@@ -42,9 +42,15 @@ const reducer = (state = {}, action: ActionLoadPromiseType | HydrateActionType) 
 
 export default reducer;
 
-export async function getAddress() {
+export async function getAddress(geoCode: string) {
+	const s:string[] = geoCode.split(',');
+	const cn:string = s[0].replace(/\s/g, '+');
+	const cityName:string = `${cn},`;
+	const stateCode:string = s[1];
+	const countryCode:string = s[2] !== undefined ? `,${s[2]}` : '';
+	const gc:string = (`${cityName}`+`${stateCode}`+`${countryCode}`).toLowerCase();
 	try {
-		const response = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=new+york,ny,us&limit=1&appid=${process.env.NEXT_PUBLIC_APP_ID}`);
+		const response = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${gc}&limit=1&appid=${process.env.NEXT_PUBLIC_APP_ID}`);
 		const ll = {
 			lat: response.data[0].lat,
 			lon: response.data[0].lon,

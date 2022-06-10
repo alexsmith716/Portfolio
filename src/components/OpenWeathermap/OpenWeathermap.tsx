@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../redux/store';
 import { getAddress, loadOpenWeathermap } from '../../redux/reducers/openWeathermapSlice';
@@ -8,6 +8,7 @@ import * as Styles from './styles';
 
 const OpenWeathermap = () => {
 	const dispatch = useDispatch();
+	const [openWeatherSearchInput, setOpenWeatherSearchInput] = useState('');
 
 	let openWeathermapDataTemp;
 
@@ -19,24 +20,19 @@ const OpenWeathermap = () => {
 	const loading = useSelector((state: AppState) => state.openWeathermapReducer.loading);
 	const loaded = useSelector((state: AppState) => state.openWeathermapReducer.loaded);
 	const openWeathermapData = useSelector((state: AppState) => state.openWeathermapReducer.openWeathermapData);
-	const coords = useSelector((state: AppState) => state.openWeathermapReducer.openWeathermapData.coord);
 
 	if(openWeathermapData && !openWeathermapData.error) {
 		openWeathermapDataTemp = formatter.format(openWeathermapData.main.temp);
 	}
 
-	const reloadOpenWeather = async () => {
-		if (coords) {
-			dispatch(loadOpenWeathermap({ lat:coords.lat, lon:coords.lon }));
-		} else {
-			await getAddress()
-				.then((response) => {
-					dispatch(loadOpenWeathermap({ lat:response.lat, lon:response.lon }));
-				})
-				.catch(() => {
-					dispatch({type: 'OPENWEATHERMAP_FAIL', error: { error: 'Error when attempting to fetch resource.' }});
-				});
-		}
+	async function fetchOpenWeather(searchVar: string) {
+		await getAddress(searchVar)
+			.then((response) => {
+				dispatch(loadOpenWeathermap({ lat:response.lat, lon:response.lon }));
+			})
+			.catch(() => {
+				dispatch({type: 'OPENWEATHERMAP_FAIL', error: { error: 'Error when attempting to fetch resource.' }});
+			});
 	};
 
 	return (
@@ -49,7 +45,7 @@ const OpenWeathermap = () => {
 					{/* (>>>>>>>>>>>>>>>>>>>>>> LOADED >>>>>>>>>>>>>>>>>>>>>>>>) */}
 					{!loading && (
 						<Styles.OpenWeathermapContainerStyled className="flex-column-center">
-							<div>
+							<div className="mb-2">
 								The Exclusive <i>OpenWeather.com</i>&nbsp;forecast{loaded && openWeathermapData && <>&nbsp;for:</>}
 							</div>
 
@@ -68,14 +64,31 @@ const OpenWeathermap = () => {
 								)}
 
 							{loaded && openWeathermapData && !openWeathermapData.error && (
-								<><Styles.DataMessageTemp>{openWeathermapDataTemp}&#x00B0;F</Styles.DataMessageTemp></>
+								<div><Styles.DataMessageTemp>{openWeathermapDataTemp}&#x00B0;F</Styles.DataMessageTemp></div>
 								)}
 
-							<div className="mt-2">
+							<div className="mt-2 mb-3">
+								<div className="row-flex justify-content-center">
+									<div className="col-eleven">
+										<input
+											type="text"
+											className="form-control"
+											name="openWeatherSearchInput"
+											value={openWeatherSearchInput}
+											onChange={(e) => setOpenWeatherSearchInput(e.target.value)}
+											placeholder="New York, NY, US"
+											data-testid="open-weather-data-form-input"
+										/>
+										<span><Styles.InputFormat>&#123;city name&#125;, &#123;state code&#125;, &#123;country code&#125;</Styles.InputFormat></span>
+									</div>
+								</div>
+							</div>
+
+							<div data-testid="open-weather-data-form-button">
 								<Button
 									className="btn-primary btn-md"
-									onClick={() => reloadOpenWeather()}
-									buttonText="Reload"
+									onClick={() => fetchOpenWeather(openWeatherSearchInput)}
+									buttonText="Fetch"
 								/>
 							</div>
 						</Styles.OpenWeathermapContainerStyled>
