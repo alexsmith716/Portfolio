@@ -22,7 +22,7 @@ const DateNow = () => {
 
 					{/* (>>>>>>>>>>>>>>>>>>>>>> LOADED >>>>>>>>>>>>>>>>>>>>>>>>) */}
 					{!loading && (
-						<Styles.DateNowContainerStyled className="flex-column-center">
+						<Styles.DateNowContainerStyled>
 							<div>
 								DateNow message:&nbsp;
 								{data && <>&apos;<Styles.DataMessage>{data.message}</Styles.DataMessage>&apos;</>}
