@@ -44,7 +44,7 @@ const OpenWeathermap = () => {
 
 					{/* (>>>>>>>>>>>>>>>>>>>>>> LOADED >>>>>>>>>>>>>>>>>>>>>>>>) */}
 					{!loading && (
-						<Styles.OpenWeathermapContainerStyled className="flex-column-center">
+						<Styles.OpenWeathermapContainerStyled>
 							<div className="mb-2">
 								The Exclusive <i>OpenWeather.com</i>&nbsp;forecast{loaded && openWeathermapData && <>&nbsp;for:</>}
 							</div>
