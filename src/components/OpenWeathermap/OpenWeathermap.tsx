@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../redux/store';
 import { getAddress, loadOpenWeathermap } from '../../redux/reducers/openWeathermapSlice';
+import formatString from '../../utils/openWeatherSearchInputStringFormat';
 import Loading from '../Loading/Loading';
 import Button from '../Button';
 import * as Styles from './styles';
@@ -27,24 +28,18 @@ const OpenWeathermap = () => {
 
 	async function fetchOpenWeather(searchVar: string) {
 		if (searchVar.length < 1) {
-			dispatch({type: 'OPENWEATHERMAP_FAIL', error: { error: 'Error when attempting to fetch resource.' }});
-		}
+			return dispatch({type: 'OPENWEATHERMAP_FAIL', error: { error: 'Error when attempting to fetch resource.' }});
+		} 
 
-		const row:string = searchVar.toLowerCase().trim().replace(/\s\s+/g, ' ');
-		const s:string[] = row.split(',');
-		const cn:string = s[0].replace(/\s/g, ' ');
-		const cityName:string = (`${cn}`).trim();
-		const stateCode:string = (s[1]).trim();
-		const countryCode:string = s[2] !== undefined ? String.fromCharCode(44)+s[2] : '';
-		const gc:string = cityName+','+String.fromCharCode(160)+stateCode+countryCode;
+		const gc:string | undefined = formatString(searchVar);
 
 		await getAddress(searchVar)
 			.then((response) => {
-				setOpenWeatherSearchInput(gc);
+				setOpenWeatherSearchInput(gc as string);
 
 				dispatch(loadOpenWeathermap({ lat:response.lat, lon:response.lon }));
 			})
-			.catch((error) => {
+			.catch(() => {
 				dispatch({type: 'OPENWEATHERMAP_FAIL', error: { error: 'Error when attempting to fetch resource.' }});
 			});
 	};
