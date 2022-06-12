@@ -1,6 +1,7 @@
 import { HYDRATE } from 'next-redux-wrapper';
 import { AnyAction } from 'redux';
 import { ActionLoadPromiseType, HydrateActionType, LatLonType } from '../../../types';
+import formatString from '../../../utils/openWeatherSearchInputStringFormat';
 import axios, { AxiosInstance } from 'axios';
 
 const OPENWEATHERMAP_LOAD = 'OPENWEATHERMAP_LOAD';
@@ -46,14 +47,8 @@ export async function getAddress(geoCode: string) {
 	if (geoCode.length < 1) {
 		return Promise.reject();
 	}
-	const row:string = geoCode.toLowerCase().trim().replace(/\s\s+/g, ' ');
-	const s:string[] = row.split(',');
-	const cn:string = s[0].replace(/\s/g, ' ');
-	const cny:string = s[0].trim().replace(/\s/g, '+');
-	const cityName:string = (`${cny}`).trim();
-	const stateCode:string = (s[1]).trim();
-	const countryCode:string = s[2] !== undefined ? String.fromCharCode(44)+s[2] : '';
-	const gc:string = (cityName+','+String.fromCharCode(160)+stateCode+countryCode).replace(/\s/g, '');
+
+	const gc:string | undefined = formatString(geoCode);
 
 	try {
 		const response = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${gc}&limit=1&appid=${process.env.NEXT_PUBLIC_APP_ID}`);
