@@ -29,9 +29,9 @@ const OpenWeathermap = () => {
 	async function fetchOpenWeather(searchVar: string) {
 		if (searchVar.length < 1) {
 			return dispatch({type: 'OPENWEATHERMAP_FAIL', error: { error: 'Error when attempting to fetch resource.' }});
-		} 
+		}
 
-		const gc:string | undefined = formatString(searchVar);
+		const gc:string | undefined = formatString(searchVar, false);
 
 		await getAddress(searchVar)
 			.then((response) => {
