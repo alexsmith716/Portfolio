@@ -26,11 +26,25 @@ const OpenWeathermap = () => {
 	}
 
 	async function fetchOpenWeather(searchVar: string) {
+		if (searchVar.length < 1) {
+			dispatch({type: 'OPENWEATHERMAP_FAIL', error: { error: 'Error when attempting to fetch resource.' }});
+		}
+
+		const row:string = searchVar.toLowerCase().trim().replace(/\s\s+/g, ' ');
+		const s:string[] = row.split(',');
+		const cn:string = s[0].replace(/\s/g, ' ');
+		const cityName:string = (`${cn}`).trim();
+		const stateCode:string = (s[1]).trim();
+		const countryCode:string = s[2] !== undefined ? String.fromCharCode(44)+s[2] : '';
+		const gc:string = cityName+','+String.fromCharCode(160)+stateCode+countryCode;
+
 		await getAddress(searchVar)
 			.then((response) => {
+				setOpenWeatherSearchInput(gc);
+
 				dispatch(loadOpenWeathermap({ lat:response.lat, lon:response.lon }));
 			})
-			.catch(() => {
+			.catch((error) => {
 				dispatch({type: 'OPENWEATHERMAP_FAIL', error: { error: 'Error when attempting to fetch resource.' }});
 			});
 	};

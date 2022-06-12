@@ -49,7 +49,7 @@ const response = {
 			"Accept": "application/json, text/plain, */*"
 		},
 		"method": "get",
-		"url": "https://api.openweathermap.org/geo/1.0/direct?q=boston, ma, us&limit=1&appid=17e58830f8f213dac33bc33f08e8ea15"
+		"url": `https://api.openweathermap.org/geo/1.0/direct?q=boston,ma,us&limit=1&appid=${process.env.NEXT_PUBLIC_APP_ID}`
 	},
 	"request": {}
 };
