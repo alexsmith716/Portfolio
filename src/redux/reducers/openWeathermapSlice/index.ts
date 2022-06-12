@@ -48,7 +48,7 @@ export async function getAddress(geoCode: string) {
 		return Promise.reject();
 	}
 
-	const gc:string | undefined = formatString(geoCode);
+	const gc:string | undefined = formatString(geoCode, true);
 
 	try {
 		const response = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${gc}&limit=1&appid=${process.env.NEXT_PUBLIC_APP_ID}`);
