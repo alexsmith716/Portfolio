@@ -27,11 +27,13 @@ const OpenWeathermap = () => {
 	}
 
 	async function fetchOpenWeather(searchVar: string) {
+		console.log('AAA!!!!! 11: ', searchVar);
 		if (searchVar.length < 1) {
 			return dispatch({type: 'OPENWEATHERMAP_FAIL', error: { error: 'Error when attempting to fetch resource.' }});
 		}
 
 		const gc:string | undefined = formatString(searchVar, false);
+		console.log('AAA!!!!! 22: ', gc);
 
 		await getAddress(searchVar)
 			.then((response) => {

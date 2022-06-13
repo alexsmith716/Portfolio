@@ -44,11 +44,13 @@ const reducer = (state = {}, action: ActionLoadPromiseType | HydrateActionType) 
 export default reducer;
 
 export async function getAddress(geoCode: string) {
+	console.log('BBB!!!!! 11: ', geoCode);
 	if (geoCode.length < 1) {
 		return Promise.reject();
 	}
 
 	const gc:string | undefined = formatString(geoCode, true);
+	console.log('BBB!!!!! 22: ', gc);
 
 	try {
 		const response = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${gc}&limit=1&appid=${process.env.NEXT_PUBLIC_APP_ID}`);

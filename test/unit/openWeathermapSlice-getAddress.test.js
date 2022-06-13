@@ -18,40 +18,7 @@ const response = {
 			"country": "US",
 			"state": "Massachusetts"
 		}
-	],
-	"status": 200,
-	"statusText": "OK",
-	"headers": {
-		"content-length": "540",
-		"content-type": "application/json; charset=utf-8"
-	},
-	"config": {
-		"transitional": {
-			"silentJSONParsing": true,
-			"forcedJSONParsing": true,
-			"clarifyTimeoutError": false
-		},
-		"transformRequest": [
-			null
-		],
-		"transformResponse": [
-			null
-		],
-		"timeout": 0,
-		"xsrfCookieName": "XSRF-TOKEN",
-		"xsrfHeaderName": "X-XSRF-TOKEN",
-		"maxContentLength": -1,
-		"maxBodyLength": -1,
-		"env": {
-			"FormData": null
-		},
-		"headers": {
-			"Accept": "application/json, text/plain, */*"
-		},
-		"method": "get",
-		"url": `https://api.openweathermap.org/geo/1.0/direct?q=boston,ma,us&limit=1&appid=${process.env.NEXT_PUBLIC_APP_ID}`
-	},
-	"request": {}
+	]
 };
 
 describe('function getAddress() fetch geo latitude and longitude', () => {

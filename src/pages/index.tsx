@@ -11,7 +11,7 @@ const IndexPage: NextPage<IndexPageProps> = ({documentTitle}) => {
 	const [title, setTitle] = useState('');
 
 	useEffect(() => {
-		setTitle(documentTitle+':'+String.fromCharCode(160)+'Home');
+		setTitle(documentTitle+':\u0020Home');
 	}, [documentTitle]);
 
 	return (

@@ -15,7 +15,7 @@ const NotFound: NextPage<NotFoundProps> = ({documentTitle}) => {
 	const [title, setTitle] = useState('');
 
 	useEffect(() => {
-		setTitle(documentTitle+':'+String.fromCharCode(160)+'Status Code 404');
+		setTitle(documentTitle+':\u0020Status Code 404');
 	}, [documentTitle]);
 
 	return (

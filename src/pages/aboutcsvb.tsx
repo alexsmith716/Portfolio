@@ -32,7 +32,7 @@ const AboutCSVB: NextPage<AboutCSVBPageProps> = ({documentTitle}) => {
 	}
 
 	useEffect(() => {
-		setTitle(documentTitle+':'+String.fromCharCode(160)+'AboutCSVB');
+		setTitle(documentTitle+':\u0020AboutCSVB');
 	}, [documentTitle]);
 
 	return (
