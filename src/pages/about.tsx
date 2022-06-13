@@ -14,7 +14,7 @@ const About: NextPage<AboutPageProps> = ({documentTitle}) => {
 	const [title, setTitle] = useState('');
 
 	useEffect(() => {
-		setTitle(documentTitle+':'+String.fromCharCode(160)+'About');
+		setTitle(documentTitle+':\u0020About');
 	}, [documentTitle]);
 
 	return (

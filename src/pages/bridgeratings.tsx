@@ -28,7 +28,7 @@ const NYCBridgeRatings: NextPage<NYCBridgeRatingsPageProps> = ({documentTitle}) 
 	}, [loaded, dispatch]);
 
 	useEffect(() => {
-		setTitle(documentTitle+':'+String.fromCharCode(160)+'NYCBridgeRatings');
+		setTitle(documentTitle+':\u0020NYCBridgeRatings');
 	}, [documentTitle]);
 
 	return (

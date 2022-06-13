@@ -20,7 +20,7 @@ const User: NextPage<UserPageProps> = ({documentTitle}) => {
 	);
 
 	useEffect(() => {
-		data ? setTitle(documentTitle+':'+String.fromCharCode(160) + data.name.toString()) : null;
+		data ? setTitle(documentTitle+':\u0020'+data.name.toString()) : null;
 	}, [data, documentTitle]);
 
 	return (

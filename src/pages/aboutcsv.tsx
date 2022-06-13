@@ -11,7 +11,7 @@ const AboutCSV: NextPage<AboutCSVPageProps> = ({documentTitle}) => {
 	const [title, setTitle] = useState('');
 
 	useEffect(() => {
-		setTitle(documentTitle+':'+String.fromCharCode(160)+'AboutCSV');
+		setTitle(documentTitle+':\u0020AboutCSV');
 	}, [documentTitle]);
 
 	return (

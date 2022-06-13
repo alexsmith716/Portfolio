@@ -19,7 +19,7 @@ const AboutB: NextPage<AboutBPageProps> = ({documentTitle}) => {
 	const [title, setTitle] = useState('');
 
 	useEffect(() => {
-		setTitle(documentTitle+':'+String.fromCharCode(160)+'AboutB');
+		setTitle(documentTitle+':\u0020AboutB');
 	}, [documentTitle]);
 
 	return (
