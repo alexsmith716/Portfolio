@@ -1,7 +1,6 @@
 import NavBar from '../../src/components/NavBar/NavBar';
 import { NavLinks } from '../../src/components/NavBar/NavLinks';
 import { render, screen } from '@testing-library/react';
-import { useRouter } from 'next/router';
 
 jest.mock('next/router', () => ({
 	useRouter() {
