@@ -1,4 +1,4 @@
-import papa from 'papaparse';
+import { parse, unparse } from 'papaparse';
 import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
 import { CognitoIdentityClient } from '@aws-sdk/client-cognito-identity';
 import { fromCognitoIdentityPool } from '@aws-sdk/credential-provider-cognito-identity';
@@ -52,7 +52,7 @@ async function doStreamToString(body: ReadableStream<any>) {
 	try {
 		const responseString: string = await streamToString(body);
 		let data: BridgeRatingType[] | undefined;
-		papa.parse(responseString, {
+		parse(responseString, {
 			header: true,
 			complete: (res) => {
 				data = res.data.map((e: any): BridgeRatingType => {
@@ -94,7 +94,7 @@ async function doStreamToString(body: ReadableStream<any>) {
 			},
 		});
 		if (data !== undefined) {
-			return papa.unparse(data);
+			return unparse(data);
 		}
 	} catch (error) {
 		return Promise.reject();
