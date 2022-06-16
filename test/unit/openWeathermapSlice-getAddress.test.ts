@@ -2,6 +2,7 @@ import axios from 'axios';
 import { getAddress } from '../../src/redux/reducers/openWeathermapSlice';
 
 jest.mock('axios');
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 const gc = 'boston,ma,us';
 const URL = `https://api.openweathermap.org/geo/1.0/direct?q=${gc}&limit=1&appid=${process.env.NEXT_PUBLIC_APP_ID}`;
@@ -26,7 +27,7 @@ describe('function getAddress() fetch geo latitude and longitude', () => {
 
 		it('should return the location latitude and longitude', async () => {
 
-			axios.get.mockResolvedValueOnce(response);
+			mockedAxios.get.mockResolvedValueOnce(response);
 
 			const result = await getAddress(gc);
 
