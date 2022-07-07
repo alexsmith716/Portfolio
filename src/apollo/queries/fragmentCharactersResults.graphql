@@ -1,0 +1,23 @@
+fragment fragmentCharactersResults on Character {
+	id
+	name
+	status
+	species
+	type
+	gender
+	origin {
+		name
+		type
+		dimension
+	}
+	location {
+		name
+		type
+		dimension
+	}
+	image
+	episode {
+		name
+		episode
+	}
+}

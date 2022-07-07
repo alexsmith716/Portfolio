@@ -104,6 +104,13 @@ export const GlobalStyle = createGlobalStyle`
 		}
 	}
 
+	//todo make 'minmax' dynamic
+	.row-grid-rickandmorty {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		column-gap: 5px;
+	}
+
 	.row-grid {
 		display: grid;
 		margin-right: -15px;
@@ -334,7 +341,7 @@ export const GlobalStyle = createGlobalStyle`
 	.col-eight,
 	.col-nine,
 	.col-ten,
-	col-eleven,
+	.col-eleven,
 	.col-twelve {
 		position: relative;
 		width: 100%;
@@ -521,6 +528,10 @@ export const GlobalStyle = createGlobalStyle`
 
 	.pb-5 {
 		padding-bottom: 3rem;
+	}
+
+	.p-0 {
+		padding: 0;
 	}
 
 	.p-2 {

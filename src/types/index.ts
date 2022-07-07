@@ -51,3 +51,38 @@ export type LatLonType = {
 	lat: number;
 	lon: number;
 };
+
+export type FilterCharacterType = {
+	name?: string;
+	status?: string;
+	species?: string;
+	type?: string;
+	gender?: string;
+};
+
+export type QueryResolverCharacterIDArgs = {
+	id: string;
+};
+
+export type QueryResolverCharacterIDSArgs = {
+	ids: QueryResolverCharacterIDArgs[];
+};
+
+export type QueryResolverCharactersArgs = {
+	page?: number;
+	filter?: FilterCharacterType;
+};
+
+export type Character = {
+	__typename: string;
+	name: string;
+	image: string;
+};
+
+export type CharactersInfo = {
+	__typename: string;
+	next: number | null;
+	prev: number | null;
+	pages: number;
+	count: number;
+};
