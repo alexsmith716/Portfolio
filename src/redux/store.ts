@@ -1,6 +1,7 @@
 import { createWrapper } from 'next-redux-wrapper';
 import { configureStore } from '@reduxjs/toolkit';
-import { combineReducers, Middleware } from 'redux';
+import { combineReducers } from 'redux';
+//Middleware
 import { AxiosInstance } from 'axios';
 //@ts-ignore
 import persistStore from 'redux-persist/es/persistStore';
@@ -11,7 +12,6 @@ import nycBridgeRatingsReducer from './reducers/nycBridgeRatingsSlice';
 import aboutCSVBReducer from './reducers/aboutCSVBSlice';
 import openWeathermapReducer from './reducers/openWeathermapSlice';
 import apiClient from '../utils/apiClient';
-//import storage from './create_sync_storage';
 
 export interface ApiClient {
 	httpClient: AxiosInstance;
@@ -25,18 +25,19 @@ const rootReducer = combineReducers({
 	openWeathermapReducer,
 });
 
-const logger: Middleware = store => next => action => {
-	console.group(action.type)
-	console.info('dispatching', action)
-	let result = next(action)
-	console.log('next state', store.getState())
-	console.groupEnd()
-	return result
-}
+//const logger: Middleware = store => next => action => {
+//  console.group(action.type)
+//  console.info('dispatching', action)
+//  let result = next(action)
+//  console.log('next state', store.getState())
+//  console.groupEnd()
+//  return result
+//}
 
 const bindMiddleware = (middleware: any) => {
 	if (process.env.NODE_ENV !== 'production') {
-		middleware.push(logger);
+		//@ts-ignore
+		//middleware.push(logger);
 	}
 	return middleware;
 }
