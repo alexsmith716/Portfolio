@@ -7,7 +7,7 @@ This is my current Portfolio project. The goal of this repo is to become familia
 [The app is deployed here.](https://portfolio-alexsmith716.vercel.app)
 
 ## Technologies Used:
-* Next.JS 12.1.6
+* Next.js
 * TypeScript
 * React 18
 * Redux
@@ -17,6 +17,14 @@ This is my current Portfolio project. The goal of this repo is to become familia
 * SWR
 * AWS SDK
 * Styled Components
+* GraphQL.js
+* Apollo Client
+* Apollo Server
+* GraphQL Code Generator
+* Cypress
+* Jest
+* React Testing Library
+* Nock
 
 ## Next.JS Features:
 - Custom `App` Component
@@ -34,6 +42,7 @@ This is my current Portfolio project. The goal of this repo is to become familia
 - AWS SDK v3 Client mock
 
 ## To-do list:
-* More Testing
+* More Testing (currently Apollo Client & GraphQL)
+* Add modal to display individual Rick & Morty character data
 * Integrate more of Redux Toolkit API
 * Go back over TS typing
