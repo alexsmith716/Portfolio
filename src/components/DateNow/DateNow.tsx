@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../redux/store';
 import { loadDateNow } from '../../redux/reducers/dateNowSlice';
-import Loading from '../Loading/Loading';
+import Loading from '../Loading';
 import Button from '../Button';
 import * as Styles from './styles';
 
