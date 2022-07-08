@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../redux/store';
 import { getAddress, loadOpenWeathermap } from '../../redux/reducers/openWeathermapSlice';
 import formatString from '../../utils/openWeatherSearchInputStringFormat';
-import Loading from '../Loading/Loading';
+import Loading from '../Loading';
 import Button from '../Button';
 import * as Styles from './styles';
 

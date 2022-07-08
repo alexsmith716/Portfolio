@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import useSwr from 'swr';
-import Loading from '../../components/Loading/Loading';
+import Loading from '../../components/Loading';
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
