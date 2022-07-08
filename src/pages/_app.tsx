@@ -1,4 +1,7 @@
 import { AppProps } from 'next/app';
+import Error from 'next/error';
+import { ApolloProvider } from '@apollo/client';
+import { useApollo } from '../apollo/apolloClient';
 import { wrapper } from '../redux/store';
 import { ThemeContext } from '../styled/ThemeContext';
 import { Layout } from '../components/Layout';
@@ -9,13 +12,21 @@ import { LatLonType } from '../types';
 import '../styled/fonts.css';
 
 const App = ({ Component, pageProps }: AppProps) => {
+	const clientApollo = useApollo(pageProps.initialApolloState);
+
+	if (pageProps.error) {
+		//return <Error statusCode={pageProps.error.statusCode} title={pageProps.error.message} />;
+	}
+
 	return (
 		<>
-			<ThemeContext>
-				<Layout>
-					<Component {...pageProps} />
-				</Layout>
-			</ThemeContext>
+			<ApolloProvider client={clientApollo}>
+				<ThemeContext>
+					<Layout>
+						<Component {...pageProps} />
+					</Layout>
+				</ThemeContext>
+			</ApolloProvider>
 		</>
 	);
 };
@@ -28,7 +39,7 @@ App.getInitialProps = wrapper.getInitialAppProps((store) => async ({ Component, 
 	}
 
 	if (isServer) {
-		const startingGeo:string = 'new york,ny,us';
+		const startingGeo:string = 'New York, NY, US';
 		const latLon = await getAddress(startingGeo)
 			.then((response) => {
 				return response;
