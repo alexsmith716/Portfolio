@@ -2,9 +2,9 @@ import type { NextPage, GetServerSideProps } from 'next';
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useSelector } from 'react-redux';
-import * as Styles from '../styles/styles-about';
+import * as Styles from '../styles';
 import { loadAboutCSVB } from '../redux/reducers/aboutCSVBSlice';
-import Loading from '../components/Loading/Loading';
+import Loading from '../components/Loading';
 import { AboutCSVBPostType } from '../types';
 import { wrapper, AppState } from '../redux/store';
 
@@ -15,11 +15,11 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
 		})
 });
 
-interface AboutCSVBPageProps {
+interface AboutSsrPageProps {
 	documentTitle: string;
 };
 
-const AboutCSVB: NextPage<AboutCSVBPageProps> = ({documentTitle}) => {
+const AboutSsr: NextPage<AboutSsrPageProps> = ({documentTitle}) => {
 	let postsData;
 
 	const loading = useSelector((state: AppState) => state.aboutCSVBReducer.loading);
@@ -32,7 +32,7 @@ const AboutCSVB: NextPage<AboutCSVBPageProps> = ({documentTitle}) => {
 	}
 
 	useEffect(() => {
-		setTitle(documentTitle+':\u0020AboutCSVB');
+		setTitle(documentTitle+':\u0020About\u0020SSR');
 	}, [documentTitle]);
 
 	return (
@@ -42,7 +42,7 @@ const AboutCSVB: NextPage<AboutCSVBPageProps> = ({documentTitle}) => {
 			</Head>
 
 			<div className="container">
-				<h1 className="mt-4 mb-3">AboutCSVB</h1>
+				<h1 className="mt-4 mb-3">About SSR</h1>
 
 				<div className="row-grid grid-six bg-lightskyblue-1 mb-5">
 					<div className="col-grid mb-4">
@@ -54,9 +54,9 @@ const AboutCSVB: NextPage<AboutCSVBPageProps> = ({documentTitle}) => {
 					</div>
 
 					<div className="col-grid">
-						<h2>AboutCSVB</h2>
+						<h2>About SSR</h2>
 						<p>
-							<b>This component utilizes &quot;getServerSideProps&quot;.</b>
+							<b>This component utilizes &quot;getServerSideProps&quot; for SSR.</b>
 						</p>
 						<p>
 							The below data must be fetched at request time. This could be due to the nature of the data or properties of the request (such as &quot;authorization&quot; headers or geo location).
@@ -85,4 +85,4 @@ const AboutCSVB: NextPage<AboutCSVBPageProps> = ({documentTitle}) => {
 	);
 };
 
-export default AboutCSVB;
+export default AboutSsr;

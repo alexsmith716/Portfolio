@@ -1,25 +1,25 @@
 import type { NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Loading from '../components/Loading/Loading';
-import * as Styles from '../styles/styles-about';
+import Loading from '../components/Loading';
+import * as Styles from '../styles';
 
 import useSwr from 'swr';
 import Link from 'next/link';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-interface AboutBPageProps {
+interface AboutSwrPageProps {
 	documentTitle: string;
 };
 
-const AboutB: NextPage<AboutBPageProps> = ({documentTitle}) => {
+const AboutSwr: NextPage<AboutSwrPageProps> = ({documentTitle}) => {
 	const { data, error } = useSwr('/api/users', fetcher);
 
 	const [title, setTitle] = useState('');
 
 	useEffect(() => {
-		setTitle(documentTitle+':\u0020AboutB');
+		setTitle(documentTitle+':\u0020About\u0020SWR');
 	}, [documentTitle]);
 
 	return (
@@ -30,7 +30,7 @@ const AboutB: NextPage<AboutBPageProps> = ({documentTitle}) => {
 
 			<div className="container">
 
-				<h1 className="mt-4 mb-3">AboutB</h1>
+				<h1 className="mt-4 mb-3">About SWR</h1>
 
 				<div className="row-grid grid-six bg-lightskyblue-1 mb-5">
 					<div className="col-grid mb-4">
@@ -42,12 +42,12 @@ const AboutB: NextPage<AboutBPageProps> = ({documentTitle}) => {
 					</div>
 
 					<div className="col-grid">
-						<h2>AboutB</h2>
+						<h2>About SWR</h2>
 						<p>
-							<b>This component utilizes the AboutB.</b>
+							<b>This component utilizes SWR.</b>
 						</p>
 
-						<div className="custom-pp">AboutB.</div>
+						<div className="custom-pp">About SWR.</div>
 
 						{/* (>>>>>>>>>>>>>>>>>>>>>> LOADING >>>>>>>>>>>>>>>>>>>>>>>>) */}
 						{!data && <Loading text="Loading" />}
@@ -80,4 +80,4 @@ const AboutB: NextPage<AboutBPageProps> = ({documentTitle}) => {
 	);
 };
 
-export default AboutB;
+export default AboutSwr;

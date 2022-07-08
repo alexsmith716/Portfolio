@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Button from '../components/Button';
-import * as Styles from '../styles/styles-about';
+import * as Styles from '../styles';
 
 interface AboutPageProps {
 	documentTitle: string;
