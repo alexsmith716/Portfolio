@@ -10,7 +10,7 @@ import { RickAndMortyCharacter } from '../components/RickAndMortyCharacter';
 import { GetAllRickAndMortyCharactersDocument } from '../apollo/generated/react-apollo';
 
 interface RickAndMortyPageProps {
-	documentTitle: string;
+	documentTitle?: string;
 };
 
 const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
@@ -30,9 +30,6 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 		fetchMore,
 		//refetch,
 	} = useQuery(GetAllRickAndMortyCharactersDocument, {
-		variables: {
-			page: !queryPage ? 1 : queryPage,
-		},
 		notifyOnNetworkStatusChange: true,
 		onError: (error) => {
 			console.error(error);

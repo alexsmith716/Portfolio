@@ -27,10 +27,10 @@ describe('Home Component', () => {
 		}
 	});
 
-	it('should render all container content', () => {
+	it('should render all container content', async () => {
 		render(<Home />);
-		expect(screen.getByText('Card Title 1')).toBeInTheDocument();
-		expect(screen.getByText('Card Title 2')).toBeInTheDocument();
-		expect(screen.getByText('Card Title 3')).toBeInTheDocument();
+		expect(await screen.findByText('Card Title 1')).toBeInTheDocument();
+		expect(await screen.findByText('Card Title 2')).toBeInTheDocument();
+		expect(await screen.findByText('Card Title 3')).toBeInTheDocument();
 	});
 });

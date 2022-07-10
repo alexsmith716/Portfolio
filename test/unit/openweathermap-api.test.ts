@@ -41,6 +41,6 @@ describe('Pages API openweathermap handler successfully fetches weather data', (
 			.get(`/data/2.5/weather?lat=${latLon.lat}&lon=${latLon.lon}&appid=${process.env.NEXT_PUBLIC_APP_ID}&units=imperial`)
 			.reply(200, responseMock);
 		const results = await handler(latLon);
-		expect(results.data.id).toEqual(4930956);
+		expect(await results.data.id).toEqual(4930956);
 	});
 });

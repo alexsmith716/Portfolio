@@ -36,8 +36,8 @@ describe('function getAddress() fetch geo latitude and longitude', () => {
 				lon:response.data[0].lon,
 			};
 
-			expect(axios.get).toHaveBeenCalledWith(`${URL}`);
-			expect(result).toEqual(ll);
+			expect(await axios.get).toHaveBeenCalledWith(`${URL}`);
+			expect(await result).toEqual(ll);
 		});
 	});
 });
