@@ -114,7 +114,7 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 						</div>
 					)}
 
-					{error || queryError && (
+					{error && (
 						<div className="flex-column align-items-center">
 							<div className="text-center">
 								<div className="bg-warn-red container-padding-radius-10 text-color-white">
@@ -149,34 +149,40 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 						</div>
 					)}
 
-					{data && !isFetchingMore && (
-						<>
-							<div className="mb-3">
-								<Button
-									type="button"
-									className={`btn-primary btn-md ${allCharactersLoaded ? 'disabled' : ''}`}
-									onClick={() => {
-										fetchMore({
+					{!isFetchingMore && (
+						<div className="mb-3">
+							<Button
+								type="button"
+								className={`btn-primary btn-md ${allCharactersLoaded ? 'disabled' : ''}`}
+								onClick={ async () => {
+									try{
+										await fetchMore({
 											variables: {
-												page: queryPage
-											},
+												page: !queryPage ? 1 : queryPage, 
+											}
 										});
-									}}
-									buttonText="Fetch More"
-								/>
-							</div>
-
-							<div className="mb-3">
-								<Button
-									type="button"
-									className="btn-secondary btn-md"
-									onClick={scrollToTop}
-									buttonText="Scroll To Top"
-								/>
-							</div>
-						</>
+									} catch(error) {
+										console.error(error);
+										setQueryError(true);
+									}
+								}}
+								buttonText="Fetch More"
+							/>
+						</div>
 					)}
-					{queryError && (
+
+					{data && !isFetchingMore && (
+						<div className="mb-3">
+							<Button
+								type="button"
+								className="btn-secondary btn-md"
+								onClick={scrollToTop}
+								buttonText="Scroll To Top"
+							/>
+						</div>
+					)}
+
+					{queryError && data && (
 						<div className="flex-column align-items-center">
 							<div className="text-center">
 								<div className="bg-warn-red container-padding-radius-10 text-color-white">
