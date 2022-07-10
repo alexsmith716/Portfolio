@@ -23,13 +23,13 @@ jest.mock('next/router', () => ({
 }));
 
 describe('Navbar Component', () => {
-	it('should render all NavBarNav container Links', () => {
+	it('should render all NavBarNav container Links', async () => {
 		render(<NavBar />);
 
-		expect(screen.getByText('DarkTheme')).toBeInTheDocument();
+		expect(await screen.findByText('DarkTheme')).toBeInTheDocument();
 
 		for(let i = 0; i < NavLinks.length; i++) {
-			expect(screen.getByText(`${NavLinks[i].title}`)).toBeInTheDocument();
+			expect(await screen.findByText(`${NavLinks[i].title}`)).toBeInTheDocument();
 		}
 	});
 });
