@@ -11,7 +11,7 @@ export const Thumbnail = styled.div`
 `;
 
 export const ThumbnailImage = styled.img`
-	width: 250px;
+	width: 300px;
 	height: auto;
 
 	//@media screen and (max-width: 992px) {

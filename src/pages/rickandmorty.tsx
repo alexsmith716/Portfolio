@@ -1,12 +1,15 @@
 import type { NextPage } from 'next';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Head from 'next/head';
-import { useQuery, NetworkStatus } from '@apollo/client';
+import { useQuery, NetworkStatus, useApolloClient } from '@apollo/client';
 import { useInView } from 'react-intersection-observer';
-import { Character, CharactersInfo } from '../types';
+import { Character } from '../apollo/generated/react-apollo';
+import { CharactersInfo } from '../types';
 import Loading from '../components/Loading';
 import Button from '../components/Button';
-import { RickAndMortyCharacter } from '../components/RickAndMortyCharacter';
+import RickAndMortyCharacter from '../components/RickAndMortyCharacter/RickAndMortyCharacter';
+import Modal from '../components/Modal/Modal';
+import RickAndMortyModalView from '../components/RickAndMortyModalView/RickAndMortyModalView';
 import { GetAllRickAndMortyCharactersDocument } from '../apollo/generated/react-apollo';
 
 interface RickAndMortyPageProps {
@@ -21,6 +24,8 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 	const [charactersLoaded, setCharactersLoaded] = useState<number | null>(null);
 	const [allCharactersLoaded, setAllCharactersLoaded] = useState(false);
 	const [queryError, setQueryError] = useState(false);
+	const [openModal, setOpenModal] = useState<boolean>(false);
+	const [currentModalCharacter, setCurrentModalCharacter] = useState<any|null>(null);
 
 	const {
 		loading,
@@ -89,6 +94,16 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 		},
 	});
 
+	const toggleModal = useCallback(() => {
+		setOpenModal(!openModal);
+	}, [openModal]);
+
+	const onView = (characterID: any) => {
+		setCurrentModalCharacter(data.characters.results.find((item: any) => item.id === characterID));
+	};
+
+	const client = useApolloClient();
+
 	return (
 		<>
 			<Head>
@@ -115,7 +130,7 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 					)}
 
 					{error && (
-						<div className="flex-column align-items-center">
+						<div className="flex-column align-items-center mb-3">
 							<div className="text-center">
 								<div className="bg-warn-red container-padding-radius-10 text-color-white">
 									Error when attempting to fetch resource.
@@ -123,6 +138,15 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 							</div>
 						</div>
 					)}
+
+					<div className="mb-3">
+						<Button
+							type="button"
+							className="btn-danger btn-md"
+							onClick={() => console.log('>>> client.extract(): ', client.extract())}
+							buttonText="Cache"
+						/>
+					</div>
 
 					{rickAndMortyCharactersCurrentPage && rickAndMortyCharactersInfo && (
 						<div className="mb-3">
@@ -132,7 +156,14 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 
 					<div className="row-grid-rickandmorty">
 						{data && data.characters.results.map((character: Character, index:number) => (
-							<div key={index} className="mb-3 container-padding-border-radius-2">
+							<div
+								key={index}
+								className="mb-3 container-padding-border-radius-2"
+								onClick={() => {
+									toggleModal();
+									onView(character.id);
+								}}
+							>
 								<RickAndMortyCharacter character={character} index={index} />
 							</div>
 						))}
@@ -193,6 +224,12 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 					)}
 					<div ref={ref}></div>
 				</div>
+
+				{openModal && (
+					<Modal toggleModal={toggleModal}>
+						<RickAndMortyModalView currentModalCharacter={currentModalCharacter} closeModal={toggleModal} />
+					</Modal>
+				)}
 			</div>
 		</>
 	);

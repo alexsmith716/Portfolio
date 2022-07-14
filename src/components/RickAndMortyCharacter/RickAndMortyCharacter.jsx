@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Thumbnail, ThumbnailImage } from '../../styles';
 
-export const RickAndMortyCharacter = ({ character, index}) => {
+function RickAndMortyCharacter({ character, index }) {
 	return (
 		<>
 			<Thumbnail>
@@ -20,3 +20,5 @@ export const RickAndMortyCharacter = ({ character, index}) => {
 		</>
 	);
 };
+
+export default RickAndMortyCharacter;

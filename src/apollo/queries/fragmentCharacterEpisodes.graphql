@@ -1,0 +1,8 @@
+fragment fragmentCharacterEpisodes on Character {
+	episode {
+		id
+		name
+		air_date
+		episode
+	}
+}
