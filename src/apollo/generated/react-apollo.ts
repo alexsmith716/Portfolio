@@ -203,7 +203,13 @@ export type QueryLocationsByIdsArgs = {
   ids: Array<Scalars['ID']>;
 };
 
-export type FragmentCharactersResultsFragment = { __typename?: 'Character', id?: string | null, name?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, image?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, episode: Array<{ __typename?: 'Episode', name?: string | null, episode?: string | null } | null> };
+export type FragmentCharacterFragment = { __typename?: 'Character', id?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null } | null };
+
+export type FragmentCharacterEpisodesFragment = { __typename?: 'Character', episode: Array<{ __typename?: 'Episode', id?: string | null, name?: string | null, air_date?: string | null, episode?: string | null } | null> };
+
+export type FragmentCharacterLocationResidentsFragment = { __typename?: 'Character', location?: { __typename?: 'Location', residents: Array<{ __typename?: 'Character', name?: string | null, id?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null } | null } | null> } | null };
+
+export type FragmentEpisodeCharactersFragment = { __typename?: 'Character', episode: Array<{ __typename?: 'Episode', characters: Array<{ __typename?: 'Character', id?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null } | null } | null> } | null> };
 
 export type HelloWorldQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -216,12 +222,49 @@ export type GetAllRickAndMortyCharactersQueryVariables = Exact<{
 }>;
 
 
-export type GetAllRickAndMortyCharactersQuery = { __typename?: 'Query', characters?: { __typename?: 'Characters', info?: { __typename?: 'Info', next?: number | null, prev?: number | null, pages?: number | null, count?: number | null } | null, results?: Array<{ __typename?: 'Character', name?: string | null, image?: string | null } | null> | null } | null };
+export type GetAllRickAndMortyCharactersQuery = { __typename?: 'Query', characters?: { __typename?: 'Characters', info?: { __typename?: 'Info', next?: number | null, prev?: number | null, pages?: number | null, count?: number | null } | null, results?: Array<{ __typename?: 'Character', id?: string | null, name?: string | null, image?: string | null } | null> | null } | null };
 
-export const FragmentCharactersResultsFragmentDoc = gql`
-    fragment fragmentCharactersResults on Character {
+export type GetRickAndMortyCharacterQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetRickAndMortyCharacterQuery = { __typename?: 'Query', character?: { __typename?: 'Character', id?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null } | null } | null };
+
+export type GetRickAndMortyCharacterLocationResidentsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetRickAndMortyCharacterLocationResidentsQuery = { __typename?: 'Query', character?: { __typename?: 'Character', location?: { __typename?: 'Location', residents: Array<{ __typename?: 'Character', name?: string | null, id?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null } | null } | null> } | null } | null };
+
+export type GetRickAndMortyCharacterEpisodesQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetRickAndMortyCharacterEpisodesQuery = { __typename?: 'Query', character?: { __typename?: 'Character', episode: Array<{ __typename?: 'Episode', id?: string | null, name?: string | null, air_date?: string | null, episode?: string | null } | null> } | null };
+
+export type GetRickAndMortyEpisodeCharactersQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetRickAndMortyEpisodeCharactersQuery = { __typename?: 'Query', character?: { __typename?: 'Character', episode: Array<{ __typename?: 'Episode', characters: Array<{ __typename?: 'Character', id?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null } | null } | null> } | null> } | null };
+
+export const FragmentCharacterEpisodesFragmentDoc = gql`
+    fragment fragmentCharacterEpisodes on Character {
+  episode {
+    id
+    name
+    air_date
+    episode
+  }
+}
+    `;
+export const FragmentCharacterFragmentDoc = gql`
+    fragment fragmentCharacter on Character {
   id
-  name
   status
   species
   type
@@ -232,17 +275,32 @@ export const FragmentCharactersResultsFragmentDoc = gql`
     dimension
   }
   location {
+    id
     name
     type
     dimension
   }
-  image
-  episode {
-    name
-    episode
-  }
 }
     `;
+export const FragmentCharacterLocationResidentsFragmentDoc = gql`
+    fragment fragmentCharacterLocationResidents on Character {
+  location {
+    residents {
+      name
+      ...fragmentCharacter
+    }
+  }
+}
+    ${FragmentCharacterFragmentDoc}`;
+export const FragmentEpisodeCharactersFragmentDoc = gql`
+    fragment fragmentEpisodeCharacters on Character {
+  episode {
+    characters {
+      ...fragmentCharacter
+    }
+  }
+}
+    ${FragmentCharacterFragmentDoc}`;
 export const HelloWorldDocument = gql`
     query HelloWorld {
   helloWorld
@@ -285,6 +343,7 @@ export const GetAllRickAndMortyCharactersDocument = gql`
       count
     }
     results {
+      id
       name
       image
     }
@@ -320,3 +379,143 @@ export function useGetAllRickAndMortyCharactersLazyQuery(baseOptions?: Apollo.La
 export type GetAllRickAndMortyCharactersQueryHookResult = ReturnType<typeof useGetAllRickAndMortyCharactersQuery>;
 export type GetAllRickAndMortyCharactersLazyQueryHookResult = ReturnType<typeof useGetAllRickAndMortyCharactersLazyQuery>;
 export type GetAllRickAndMortyCharactersQueryResult = Apollo.QueryResult<GetAllRickAndMortyCharactersQuery, GetAllRickAndMortyCharactersQueryVariables>;
+export const GetRickAndMortyCharacterDocument = gql`
+    query GetRickAndMortyCharacter($id: ID!) {
+  character(id: $id) {
+    ...fragmentCharacter
+  }
+}
+    ${FragmentCharacterFragmentDoc}`;
+
+/**
+ * __useGetRickAndMortyCharacterQuery__
+ *
+ * To run a query within a React component, call `useGetRickAndMortyCharacterQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetRickAndMortyCharacterQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetRickAndMortyCharacterQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetRickAndMortyCharacterQuery(baseOptions: Apollo.QueryHookOptions<GetRickAndMortyCharacterQuery, GetRickAndMortyCharacterQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetRickAndMortyCharacterQuery, GetRickAndMortyCharacterQueryVariables>(GetRickAndMortyCharacterDocument, options);
+      }
+export function useGetRickAndMortyCharacterLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetRickAndMortyCharacterQuery, GetRickAndMortyCharacterQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetRickAndMortyCharacterQuery, GetRickAndMortyCharacterQueryVariables>(GetRickAndMortyCharacterDocument, options);
+        }
+export type GetRickAndMortyCharacterQueryHookResult = ReturnType<typeof useGetRickAndMortyCharacterQuery>;
+export type GetRickAndMortyCharacterLazyQueryHookResult = ReturnType<typeof useGetRickAndMortyCharacterLazyQuery>;
+export type GetRickAndMortyCharacterQueryResult = Apollo.QueryResult<GetRickAndMortyCharacterQuery, GetRickAndMortyCharacterQueryVariables>;
+export const GetRickAndMortyCharacterLocationResidentsDocument = gql`
+    query GetRickAndMortyCharacterLocationResidents($id: ID!) {
+  character(id: $id) {
+    ...fragmentCharacterLocationResidents
+  }
+}
+    ${FragmentCharacterLocationResidentsFragmentDoc}`;
+
+/**
+ * __useGetRickAndMortyCharacterLocationResidentsQuery__
+ *
+ * To run a query within a React component, call `useGetRickAndMortyCharacterLocationResidentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetRickAndMortyCharacterLocationResidentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetRickAndMortyCharacterLocationResidentsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetRickAndMortyCharacterLocationResidentsQuery(baseOptions: Apollo.QueryHookOptions<GetRickAndMortyCharacterLocationResidentsQuery, GetRickAndMortyCharacterLocationResidentsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetRickAndMortyCharacterLocationResidentsQuery, GetRickAndMortyCharacterLocationResidentsQueryVariables>(GetRickAndMortyCharacterLocationResidentsDocument, options);
+      }
+export function useGetRickAndMortyCharacterLocationResidentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetRickAndMortyCharacterLocationResidentsQuery, GetRickAndMortyCharacterLocationResidentsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetRickAndMortyCharacterLocationResidentsQuery, GetRickAndMortyCharacterLocationResidentsQueryVariables>(GetRickAndMortyCharacterLocationResidentsDocument, options);
+        }
+export type GetRickAndMortyCharacterLocationResidentsQueryHookResult = ReturnType<typeof useGetRickAndMortyCharacterLocationResidentsQuery>;
+export type GetRickAndMortyCharacterLocationResidentsLazyQueryHookResult = ReturnType<typeof useGetRickAndMortyCharacterLocationResidentsLazyQuery>;
+export type GetRickAndMortyCharacterLocationResidentsQueryResult = Apollo.QueryResult<GetRickAndMortyCharacterLocationResidentsQuery, GetRickAndMortyCharacterLocationResidentsQueryVariables>;
+export const GetRickAndMortyCharacterEpisodesDocument = gql`
+    query GetRickAndMortyCharacterEpisodes($id: ID!) {
+  character(id: $id) {
+    ...fragmentCharacterEpisodes
+  }
+}
+    ${FragmentCharacterEpisodesFragmentDoc}`;
+
+/**
+ * __useGetRickAndMortyCharacterEpisodesQuery__
+ *
+ * To run a query within a React component, call `useGetRickAndMortyCharacterEpisodesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetRickAndMortyCharacterEpisodesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetRickAndMortyCharacterEpisodesQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetRickAndMortyCharacterEpisodesQuery(baseOptions: Apollo.QueryHookOptions<GetRickAndMortyCharacterEpisodesQuery, GetRickAndMortyCharacterEpisodesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetRickAndMortyCharacterEpisodesQuery, GetRickAndMortyCharacterEpisodesQueryVariables>(GetRickAndMortyCharacterEpisodesDocument, options);
+      }
+export function useGetRickAndMortyCharacterEpisodesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetRickAndMortyCharacterEpisodesQuery, GetRickAndMortyCharacterEpisodesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetRickAndMortyCharacterEpisodesQuery, GetRickAndMortyCharacterEpisodesQueryVariables>(GetRickAndMortyCharacterEpisodesDocument, options);
+        }
+export type GetRickAndMortyCharacterEpisodesQueryHookResult = ReturnType<typeof useGetRickAndMortyCharacterEpisodesQuery>;
+export type GetRickAndMortyCharacterEpisodesLazyQueryHookResult = ReturnType<typeof useGetRickAndMortyCharacterEpisodesLazyQuery>;
+export type GetRickAndMortyCharacterEpisodesQueryResult = Apollo.QueryResult<GetRickAndMortyCharacterEpisodesQuery, GetRickAndMortyCharacterEpisodesQueryVariables>;
+export const GetRickAndMortyEpisodeCharactersDocument = gql`
+    query GetRickAndMortyEpisodeCharacters($id: ID!) {
+  character(id: $id) {
+    ...fragmentEpisodeCharacters
+  }
+}
+    ${FragmentEpisodeCharactersFragmentDoc}`;
+
+/**
+ * __useGetRickAndMortyEpisodeCharactersQuery__
+ *
+ * To run a query within a React component, call `useGetRickAndMortyEpisodeCharactersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetRickAndMortyEpisodeCharactersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetRickAndMortyEpisodeCharactersQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetRickAndMortyEpisodeCharactersQuery(baseOptions: Apollo.QueryHookOptions<GetRickAndMortyEpisodeCharactersQuery, GetRickAndMortyEpisodeCharactersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetRickAndMortyEpisodeCharactersQuery, GetRickAndMortyEpisodeCharactersQueryVariables>(GetRickAndMortyEpisodeCharactersDocument, options);
+      }
+export function useGetRickAndMortyEpisodeCharactersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetRickAndMortyEpisodeCharactersQuery, GetRickAndMortyEpisodeCharactersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetRickAndMortyEpisodeCharactersQuery, GetRickAndMortyEpisodeCharactersQueryVariables>(GetRickAndMortyEpisodeCharactersDocument, options);
+        }
+export type GetRickAndMortyEpisodeCharactersQueryHookResult = ReturnType<typeof useGetRickAndMortyEpisodeCharactersQuery>;
+export type GetRickAndMortyEpisodeCharactersLazyQueryHookResult = ReturnType<typeof useGetRickAndMortyEpisodeCharactersLazyQuery>;
+export type GetRickAndMortyEpisodeCharactersQueryResult = Apollo.QueryResult<GetRickAndMortyEpisodeCharactersQuery, GetRickAndMortyEpisodeCharactersQueryVariables>;

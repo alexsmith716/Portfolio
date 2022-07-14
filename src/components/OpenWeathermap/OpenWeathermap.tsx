@@ -77,8 +77,8 @@ const OpenWeathermap = () => {
 								)}
 
 							<div className="mt-2 mb-3">
-								<div className="row-flex justify-content-center">
-									<div className="col-eleven">
+								<div className="display-flex justify-content-center">
+									<div>
 										<input
 											type="text"
 											className="form-control"
@@ -88,7 +88,7 @@ const OpenWeathermap = () => {
 											placeholder="New York, NY, US"
 											data-testid="open-weather-data-form-input"
 										/>
-										<span><Styles.InputFormat>&#123;city name&#125;, &#123;state code&#125;, &#123;country code&#125;</Styles.InputFormat></span>
+										<span><Styles.InputFormat>&#123;city name&#125;,&nbsp;&nbsp;&#123;state code&#125;,&nbsp;&nbsp;&#123;country code&#125;</Styles.InputFormat></span>
 									</div>
 								</div>
 							</div>

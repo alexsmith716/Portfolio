@@ -43,6 +43,8 @@ This is my current Portfolio project. The goal of this repo is to become familia
 
 ## To-do list:
 * More Testing (currently Apollo Client & GraphQL)
+* Address warning "Cache data may be lost when replacing the character field of a Query object."
 * Add modal to display individual Rick & Morty character data
-* Integrate more of Redux Toolkit API
+* Further integrate Code Generator Types
 * Go back over TS typing
+* Integrate more of Redux Toolkit API

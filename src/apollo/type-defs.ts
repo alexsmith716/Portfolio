@@ -5,11 +5,23 @@ export const typeDefs = gql`
 		helloWorld: String
 
 		characters(page: Int, filter: FilterCharacter): Characters
+
+		character(id: ID!): Character
 	}
 
 	type Characters {
 		info: Info
 		results: [Character]
+	}
+
+	type Locations {
+		info: Info
+		results: [Location]
+	}
+
+	type Episodes {
+		info: Info
+		results: [Episode]
 	}
 
 	type Character {
@@ -41,7 +53,6 @@ export const typeDefs = gql`
 		air_date: String
 		episode: String
 		characters: [Character]
-		created: String
 	}
 
 	type Info {
@@ -57,5 +68,16 @@ export const typeDefs = gql`
 		species: String
 		type: String
 		gender: String
+	}
+
+	input FilterLocation {
+		name: String
+		type: String
+		dimension: String
+	}
+
+	input FilterEpisode {
+		name: String
+		episode: String
 	}
 `;

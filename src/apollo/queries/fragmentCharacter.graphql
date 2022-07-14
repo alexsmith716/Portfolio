@@ -1,6 +1,5 @@
-fragment fragmentCharactersResults on Character {
+fragment fragmentCharacter on Character {
 	id
-	name
 	status
 	species
 	type
@@ -11,13 +10,9 @@ fragment fragmentCharactersResults on Character {
 		dimension
 	}
 	location {
+		id
 		name
 		type
 		dimension
-	}
-	image
-	episode {
-		name
-		episode
 	}
 }
