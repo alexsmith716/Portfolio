@@ -1,4 +1,5 @@
 fragment fragmentCharacterEpisodes on Character {
+	id
 	episode {
 		id
 		name

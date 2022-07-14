@@ -44,7 +44,6 @@ This is my current Portfolio project. The goal of this repo is to become familia
 ## To-do list:
 * Modify Modal layout for small devices
 * More Testing (currently Apollo Client & GraphQL)
-* Address warning "Cache data may be lost when replacing the character field of a Query object."
 * Add modal to display individual Rick & Morty character data
 * Further integrate Code Generator Types
 * Go back over TS typing

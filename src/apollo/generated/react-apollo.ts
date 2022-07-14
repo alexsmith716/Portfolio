@@ -205,11 +205,11 @@ export type QueryLocationsByIdsArgs = {
 
 export type FragmentCharacterFragment = { __typename?: 'Character', id?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null } | null };
 
-export type FragmentCharacterEpisodesFragment = { __typename?: 'Character', episode: Array<{ __typename?: 'Episode', id?: string | null, name?: string | null, air_date?: string | null, episode?: string | null } | null> };
+export type FragmentCharacterEpisodesFragment = { __typename?: 'Character', id?: string | null, episode: Array<{ __typename?: 'Episode', id?: string | null, name?: string | null, air_date?: string | null, episode?: string | null } | null> };
 
-export type FragmentCharacterLocationResidentsFragment = { __typename?: 'Character', location?: { __typename?: 'Location', residents: Array<{ __typename?: 'Character', name?: string | null, id?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null } | null } | null> } | null };
+export type FragmentCharacterLocationResidentsFragment = { __typename?: 'Character', id?: string | null, location?: { __typename?: 'Location', residents: Array<{ __typename?: 'Character', name?: string | null, id?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null } | null } | null> } | null };
 
-export type FragmentEpisodeCharactersFragment = { __typename?: 'Character', episode: Array<{ __typename?: 'Episode', characters: Array<{ __typename?: 'Character', id?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null } | null } | null> } | null> };
+export type FragmentEpisodeCharactersFragment = { __typename?: 'Character', id?: string | null, episode: Array<{ __typename?: 'Episode', characters: Array<{ __typename?: 'Character', id?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null } | null } | null> } | null> };
 
 export type HelloWorldQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -236,24 +236,25 @@ export type GetRickAndMortyCharacterLocationResidentsQueryVariables = Exact<{
 }>;
 
 
-export type GetRickAndMortyCharacterLocationResidentsQuery = { __typename?: 'Query', character?: { __typename?: 'Character', location?: { __typename?: 'Location', residents: Array<{ __typename?: 'Character', name?: string | null, id?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null } | null } | null> } | null } | null };
+export type GetRickAndMortyCharacterLocationResidentsQuery = { __typename?: 'Query', character?: { __typename?: 'Character', id?: string | null, location?: { __typename?: 'Location', residents: Array<{ __typename?: 'Character', name?: string | null, id?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null } | null } | null> } | null } | null };
 
 export type GetRickAndMortyCharacterEpisodesQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetRickAndMortyCharacterEpisodesQuery = { __typename?: 'Query', character?: { __typename?: 'Character', episode: Array<{ __typename?: 'Episode', id?: string | null, name?: string | null, air_date?: string | null, episode?: string | null } | null> } | null };
+export type GetRickAndMortyCharacterEpisodesQuery = { __typename?: 'Query', character?: { __typename?: 'Character', id?: string | null, episode: Array<{ __typename?: 'Episode', id?: string | null, name?: string | null, air_date?: string | null, episode?: string | null } | null> } | null };
 
 export type GetRickAndMortyEpisodeCharactersQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetRickAndMortyEpisodeCharactersQuery = { __typename?: 'Query', character?: { __typename?: 'Character', episode: Array<{ __typename?: 'Episode', characters: Array<{ __typename?: 'Character', id?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null } | null } | null> } | null> } | null };
+export type GetRickAndMortyEpisodeCharactersQuery = { __typename?: 'Query', character?: { __typename?: 'Character', id?: string | null, episode: Array<{ __typename?: 'Episode', characters: Array<{ __typename?: 'Character', id?: string | null, status?: string | null, species?: string | null, type?: string | null, gender?: string | null, origin?: { __typename?: 'Location', name?: string | null, type?: string | null, dimension?: string | null } | null, location?: { __typename?: 'Location', id?: string | null, name?: string | null, type?: string | null, dimension?: string | null } | null } | null> } | null> } | null };
 
 export const FragmentCharacterEpisodesFragmentDoc = gql`
     fragment fragmentCharacterEpisodes on Character {
+  id
   episode {
     id
     name
@@ -284,6 +285,7 @@ export const FragmentCharacterFragmentDoc = gql`
     `;
 export const FragmentCharacterLocationResidentsFragmentDoc = gql`
     fragment fragmentCharacterLocationResidents on Character {
+  id
   location {
     residents {
       name
@@ -294,6 +296,7 @@ export const FragmentCharacterLocationResidentsFragmentDoc = gql`
     ${FragmentCharacterFragmentDoc}`;
 export const FragmentEpisodeCharactersFragmentDoc = gql`
     fragment fragmentEpisodeCharacters on Character {
+  id
   episode {
     characters {
       ...fragmentCharacter
