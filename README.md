@@ -42,9 +42,7 @@ This is my current Portfolio project. The goal of this repo is to become familia
 - AWS SDK v3 Client mock
 
 ## To-do list:
-* Modify Modal layout for small devices
 * More Testing (currently Apollo Client & GraphQL)
-* Add modal to display individual Rick & Morty character data
 * Further integrate Code Generator Types
 * Go back over TS typing
 * Integrate more of Redux Toolkit API

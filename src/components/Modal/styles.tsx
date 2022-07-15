@@ -9,7 +9,6 @@ export const ModalMain = styled.div`
 	overflow-y: auto;
 	outline: 0;
 	padding-top: 48px;
-	z-index: 1090;
 `;
 
 export const ModalDialog = styled.div`
