@@ -1,23 +1,37 @@
 import styled from 'styled-components';
 
-export const ModalContainer = styled.div`
-	left: 0;
+export const ModalMain = styled.div`
+	position: fixed;
 	top: 0;
-	width: 100%;
-	height: 100vh;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow-y: auto;
+	outline: 0;
+	padding-top: 48px;
+	z-index: 1090;
+`;
+
+export const ModalDialog = styled.div`
+	position: relative;
+	width: auto;
+	margin: 0.5rem;
+	pointer-events: none;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	position: fixed;
-	flex-direction: column;
+	min-height: calc(100% - (0.5rem * 2));
+	z-index: 10000;
 `;
 
-export const ModalChildren = styled.div`
+export const ModalContent = styled.div`
+	//position: relative;
+	pointer-events: auto;
 	border: 1px solid black;
 	box-shadow: 0 0 30px rgba(30, 30, 30, 0.185);
 	box-sizing: border-box;
 	background-color: #404040;
-	z-index: 10000;
+	outline: 0;
 `;
 
 export const Screen = styled.div`

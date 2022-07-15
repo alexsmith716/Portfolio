@@ -224,13 +224,12 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 					)}
 					<div ref={ref}></div>
 				</div>
-
-				{openModal && (
-					<Modal toggleModal={toggleModal}>
-						<RickAndMortyModalView currentModalCharacter={currentModalCharacter} closeModal={toggleModal} />
-					</Modal>
-				)}
 			</div>
+			{openModal && (
+				<Modal toggleModal={toggleModal}>
+					<RickAndMortyModalView currentModalCharacter={currentModalCharacter} closeModal={toggleModal} />
+				</Modal>
+			)}
 		</>
 	);
 };
