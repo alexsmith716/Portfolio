@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { ModalContainer, ModalChildren, Screen } from './styles';
+import { ModalMain, ModalDialog, ModalContent, Screen } from './styles';
 
 interface ModalProps {
 	toggleModal: () => void;
@@ -7,10 +7,12 @@ interface ModalProps {
 
 function Modal({ toggleModal, children }: PropsWithChildren<ModalProps>) {
 	return (
-		<ModalContainer>
-			<ModalChildren>
-				{children}
-			</ModalChildren>
+		<ModalMain>
+			<ModalDialog>
+				<ModalContent>
+					{children}
+				</ModalContent>
+			</ModalDialog>
 			<Screen
 				onClick={(e: React.MouseEvent) => {
 					e.preventDefault();
@@ -19,7 +21,7 @@ function Modal({ toggleModal, children }: PropsWithChildren<ModalProps>) {
 					}
 				}}
 			/>
-		</ModalContainer>
+		</ModalMain>
 	);
 }
 
