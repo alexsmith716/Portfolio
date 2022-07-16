@@ -11,11 +11,13 @@ import { GetAllRickAndMortyCharactersDocument } from '../../src/apollo/generated
 const mockCharacters = [
 	{
 		__typename: 'Character',
+		id: '1',
 		name: 'Rick Sanchez',
 		image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg'
 	},
 	{
 		__typename: 'Character',
+		id: '20',
 		name: 'Ants in my Eyes Johnson',
 		image: 'https://rickandmortyapi.com/api/character/avatar/20.jpeg'
 	}
@@ -54,10 +56,10 @@ describe('RickAndMorty Page', () => {
 				<RickAndMorty />
 			</MockedProvider>
 		); */}
-    await renderApollo(<RickAndMorty />, {
-    	mocks,
-    	cache,
-    });
+		await renderApollo(<RickAndMorty />, {
+			mocks,
+			cache,
+		});
 		expect(await screen.findByText('The Rick And Morty Page')).toBeInTheDocument();
 		expect(await screen.findByText('Rick Sanchez')).toBeInTheDocument();
 		expect(await screen.findByText('Ants in my Eyes Johnson')).toBeInTheDocument();
