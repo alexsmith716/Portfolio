@@ -33,7 +33,6 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 		data,
 		networkStatus,
 		fetchMore,
-		//refetch,
 	} = useQuery(GetAllRickAndMortyCharactersDocument, {
 		notifyOnNetworkStatusChange: true,
 		onError: (error) => {
@@ -150,7 +149,7 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 
 					{rickAndMortyCharactersCurrentPage && rickAndMortyCharactersInfo && (
 						<div className="mb-3">
-							<h5>Page {rickAndMortyCharactersCurrentPage} of {rickAndMortyCharactersInfo.pages}</h5>
+							<h5>{`Page ${rickAndMortyCharactersCurrentPage} of ${rickAndMortyCharactersInfo.pages}`}</h5>
 						</div>
 					)}
 
@@ -172,10 +171,10 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 					{rickAndMortyCharactersCurrentPage && rickAndMortyCharactersInfo && (
 						<div className="mb-3">
 							<div>
-								<h5>Page {rickAndMortyCharactersCurrentPage} of {rickAndMortyCharactersInfo.pages}</h5>
+								<h5>{`Page ${rickAndMortyCharactersCurrentPage} of ${rickAndMortyCharactersInfo.pages}`}</h5>
 							</div>
 							<div>
-								<h5>Characters Loaded: {charactersLoaded}</h5>
+								<h5>{`Characters Loaded: ${charactersLoaded}`}</h5>
 							</div>
 						</div>
 					)}
@@ -224,6 +223,8 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 					)}
 					<div ref={ref}></div>
 				</div>
+
+
 			</div>
 			{openModal && (
 				<Modal toggleModal={toggleModal}>
