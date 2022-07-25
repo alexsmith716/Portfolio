@@ -15,4 +15,10 @@ export const theme = {
 		spinnerColor: `${colors.dodgerblue}`,
 		rutgersScarlet: colors.rutgersScarlet,
 	},
+	modalClosed: {
+		overflow: '',
+	},
+	modalOpen: {
+		overflow: 'hidden',
+	},
 };

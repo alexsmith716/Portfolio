@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const ViewDiv = styled.div`
+	height: 100%;
 	padding: 20px;
+	padding-bottom: 40px;
 `;
 
 export const WrapperDiv = styled.div`

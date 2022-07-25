@@ -6,6 +6,7 @@ export const ModalMain = styled.div`
 	right: 0;
 	bottom: 0;
 	left: 0;
+	width: 100%;
 	overflow-y: auto;
 	outline: 0;
 	padding-top: 48px;
@@ -13,10 +14,11 @@ export const ModalMain = styled.div`
 
 export const ModalDialog = styled.div`
 	position: relative;
-	width: auto;
 	margin: 0.5rem;
-	pointer-events: none;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	pointer-events: none;
 	align-items: center;
 	justify-content: center;
 	min-height: calc(100% - (0.5rem * 2));
@@ -24,7 +26,13 @@ export const ModalDialog = styled.div`
 `;
 
 export const ModalContent = styled.div`
-	//position: relative;
+	position: relative;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+
+	flex-direction: column;
+	max-width: 768px;
 	pointer-events: auto;
 	border: 1px solid black;
 	box-shadow: 0 0 30px rgba(30, 30, 30, 0.185);
