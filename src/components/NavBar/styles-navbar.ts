@@ -9,7 +9,7 @@ interface Props {
 }
 
 const NavBarBGTheme = css`
-	background-color: ${(props): string => props.theme.navBarColor};
+	background-color: ${(props): string => props.theme.app.navBarColor};
 `;
 
 export const NavBar = styled.div`

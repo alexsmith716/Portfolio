@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import { ModalMain, ModalDialog, ModalContent, Screen } from './styles';
 
 interface ModalProps {
@@ -6,8 +6,23 @@ interface ModalProps {
 }
 
 function Modal({ toggleModal, children }: PropsWithChildren<ModalProps>) {
+
+	// vertically re-position to selected character
+	useEffect(() => {
+		document.body.style.cssText = `
+			position: fixed;
+			top: -${window.scrollY}px;
+			overflow-y: auto;
+			width: 100%;`;
+		return () => {
+			const scrollY = document.body.style.top;
+			document.body.style.cssText = '';
+			window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+		};
+	}, []);
+
 	return (
-		<ModalMain>
+		<ModalMain> 
 			<ModalDialog>
 				<ModalContent>
 					{children}

@@ -7,6 +7,7 @@ import { Character } from '../apollo/generated/react-apollo';
 import { CharactersInfo } from '../types';
 import Loading from '../components/Loading';
 import Button from '../components/Button';
+import { useTheme } from '../styled/ThemeContext';
 import RickAndMortyCharacter from '../components/RickAndMortyCharacter/RickAndMortyCharacter';
 import Modal from '../components/Modal/Modal';
 import RickAndMortyModalView from '../components/RickAndMortyModalView/RickAndMortyModalView';
@@ -26,6 +27,7 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 	const [queryError, setQueryError] = useState(false);
 	const [openModal, setOpenModal] = useState<boolean>(false);
 	const [currentModalCharacter, setCurrentModalCharacter] = useState<any|null>(null);
+	const themeMode = useTheme();
 
 	const {
 		loading,
@@ -95,6 +97,7 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 
 	const toggleModal = useCallback(() => {
 		setOpenModal(!openModal);
+		themeMode.toggleModalState();
 	}, [openModal]);
 
 	const onView = (characterID: any) => {
@@ -166,6 +169,7 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 								<RickAndMortyCharacter character={character} index={index} />
 							</div>
 						))}
+						<div ref={ref}></div>
 					</div>
 
 					{rickAndMortyCharactersCurrentPage && rickAndMortyCharactersInfo && (
@@ -221,9 +225,7 @@ const RickAndMorty: NextPage<RickAndMortyPageProps> = ({ documentTitle }) => {
 							</div>
 						</div>
 					)}
-					<div ref={ref}></div>
 				</div>
-
 
 			</div>
 			{openModal && (

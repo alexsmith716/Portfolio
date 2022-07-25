@@ -13,8 +13,6 @@ import {
 function RickAndMortyModalView({ currentModalCharacter, closeModal }: any) {
 	//const [queryError, setQueryError] = useState(false);
 
-	// =============================================================
-
 	const {
 		//loading: rickAndMortyCharacterLOADING,
 		//error: rickAndMortyCharacterERROR,
@@ -29,11 +27,9 @@ function RickAndMortyModalView({ currentModalCharacter, closeModal }: any) {
 			//setQueryError(true);
 		},
 		//onCompleted: (rickAndMortyCharacterDATA) => {
-		//	setQueryError(false);
+		//  setQueryError(false);
 		//},
 	});
-
-	// =============================================================
 
 	const [getCharacterLocationResidents,{
 			//loading: characterLocationResidentsLOADING,
@@ -50,12 +46,10 @@ function RickAndMortyModalView({ currentModalCharacter, closeModal }: any) {
 				//setQueryError(true);
 			},
 			//onCompleted: (characterLocationResidentsDATA) => {
-			//	setQueryError(false);
+			//  setQueryError(false);
 			//},
 		},
 	);
-
-	// =============================================================
 
 	const [getCharacterEpisodes,{
 			//loading: characterEpisodesLOADING,
@@ -72,12 +66,10 @@ function RickAndMortyModalView({ currentModalCharacter, closeModal }: any) {
 				//setQueryError(true);
 			},
 			//onCompleted: (characterEpisodesDATA) => {
-			//	setQueryError(false);
+			//  setQueryError(false);
 			//},
 		},
 	);
-
-	// =============================================================
 
 	const [getEpisodeCharacters,{
 			//loading: episodeCharactersLOADING,
@@ -94,16 +86,14 @@ function RickAndMortyModalView({ currentModalCharacter, closeModal }: any) {
 				//setQueryError(true);
 			},
 			//onCompleted: (episodeCharactersDATA) => {
-			//	setQueryError(false);
+			//  setQueryError(false);
 			//},
 		},
 	);
 
-	// =============================================================
-
 	//useEffect(() => {
-	//	console.log('currentModalCharacter.id: ', currentModalCharacter.id);
-	//	console.log('currentModalCharacter: ', currentModalCharacter);
+	//  console.log('currentModalCharacter.id: ', currentModalCharacter.id);
+	//  console.log('currentModalCharacter: ', currentModalCharacter);
 	//}, []);
 
 	const client = useApolloClient();

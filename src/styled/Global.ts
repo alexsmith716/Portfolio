@@ -2,12 +2,12 @@ import { createGlobalStyle, css } from 'styled-components';
 import { colors } from './Colors';
 
 const bodyTheme = css`
-	color: ${(props): string => props.theme.textColor};
-	background-color: ${(props): string => props.theme.backgroundColor};
+	color: ${(props): string => props.theme.app.textColor};
+	background-color: ${(props): string => props.theme.app.backgroundColor};
 `;
 
 const spinnerTheme = css`
-	border: 0.25em solid ${(props): string => props.theme.spinnerColor};
+	border: 0.25em solid ${(props): string => props.theme.app.spinnerColor};
 `;
 
 export const GlobalStyle = createGlobalStyle`
@@ -548,6 +548,10 @@ export const GlobalStyle = createGlobalStyle`
 
 	.p-5 {
 		padding: 3rem;
+	}
+
+	.cursor-pointer {
+		cursor: pointer;
 	}
 
 	.btn {

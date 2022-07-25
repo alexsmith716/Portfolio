@@ -1,11 +1,11 @@
 import React, { ReactNode } from 'react';
+import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
 import NavBar from '../NavBar/NavBar';
 import DateNow from '../DateNow/DateNow';
 import OpenWeathermap from '../OpenWeathermap/OpenWeathermap';
 import UserAgent from '../UserAgent/UserAgent';
 import Footer from '../Footer/Footer';
-import Head from 'next/head';
 
 import { useTheme } from '../../styled/ThemeContext';
 import { AppTheme } from '../../styled';
@@ -18,8 +18,12 @@ type Props = {
 
 export const Layout = ({ children, title = 'Alex Smith\'s App' }: Props) => {
 	const themeMode = useTheme();
-	const key = `${themeMode.mode}` as string;
-	const themeModeMode = AppTheme.theme[key as keyof typeof AppTheme.theme];
+	const themeModeKey = `${themeMode.mode}` as string;
+	const themeModeModalKey = `${themeMode.modalMode}` as string;
+	const themeModeMode = {
+		app: AppTheme.theme[themeModeKey as keyof typeof AppTheme.theme],
+		modal: AppTheme.theme[themeModeModalKey as keyof typeof AppTheme.theme],
+	};
 
 	return (
 		<ThemeProvider theme={themeModeMode}>
