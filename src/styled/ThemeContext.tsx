@@ -21,7 +21,7 @@ export const Context = React.createContext<ContextProps>({
 	toggleModalState: () => {},
 });
 
-export const useTheme = (): ContextProps => useContext(Context);
+export const useReactContext = (): ContextProps => useContext(Context);
 
 export const ThemeContext: React.FC<Props> = ({ children }) => {
 	const [themeModeState, setThemeModeState] = useState({ mode: defaultMode });

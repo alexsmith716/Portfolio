@@ -4,10 +4,10 @@ import { useRouter } from 'next/router';
 import { NavLinks } from './NavLinks';
 import * as Styles from './styles-navbar';
 
-import { useTheme } from '../../styled/ThemeContext';
+import { useReactContext } from '../../styled/ThemeContext';
 
 const NavBar = () => {
-	const themeMode = useTheme();
+	const themeMode = useReactContext();
 	const router = useRouter();
 
 	const location = router.pathname;
