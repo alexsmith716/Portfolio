@@ -7,7 +7,7 @@ import OpenWeathermap from '../OpenWeathermap/OpenWeathermap';
 import UserAgent from '../UserAgent/UserAgent';
 import Footer from '../Footer/Footer';
 
-import { useTheme } from '../../styled/ThemeContext';
+import { useReactContext } from '../../styled/ThemeContext';
 import { AppTheme } from '../../styled';
 import { Global } from '../../styled';
 
@@ -17,7 +17,7 @@ type Props = {
 }
 
 export const Layout = ({ children, title = 'Alex Smith\'s App' }: Props) => {
-	const themeMode = useTheme();
+	const themeMode = useReactContext();
 	const themeModeKey = `${themeMode.mode}` as string;
 	const themeModeModalKey = `${themeMode.modalMode}` as string;
 	const themeModeMode = {
